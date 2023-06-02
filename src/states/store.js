@@ -1,22 +1,23 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   applyMiddleware,
   combineReducers,
   legacy_createStore as createStore,
 } from 'redux';
-import {persistStore, persistReducer} from 'redux-persist';
 import thunk from 'redux-thunk';
 import authReducer from './auth/authReducer';
-
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-};
+import homeReducer from './home/homeReducer';
+import surveyReducer from './survey/surveyReducer';
+import pengaduanReducer from './pengaduan/pengaduanReducer';
+import tugasReducer from './tugas/tugasReducer';
+import logistikReducer from './logistik/logistikReducer';
 
 const reducer = combineReducers({
-  authReducer: persistReducer(persistConfig, authReducer),
+  authReducer: authReducer,
+  homeReducer: homeReducer,
+  surveyReducer: surveyReducer,
+  pengaduanReducer: pengaduanReducer,
+  tugasReducer: tugasReducer,
+  logistikReducer: logistikReducer,
 });
 
 export const store = createStore(reducer, applyMiddleware(thunk));
-
-export const persistor = persistStore(store);

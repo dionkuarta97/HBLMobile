@@ -1,18 +1,18 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {persistor, store} from './states/store';
-import {PersistGate} from 'redux-persist/integration/react';
+import {store} from './states/store';
 import {NavigationContainer} from '@react-navigation/native';
 import Root from './navigations/Root';
+import {NativeBaseProvider} from 'native-base';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <NativeBaseProvider>
         <NavigationContainer>
           <Root />
         </NavigationContainer>
-      </PersistGate>
+      </NativeBaseProvider>
     </Provider>
   );
 };
