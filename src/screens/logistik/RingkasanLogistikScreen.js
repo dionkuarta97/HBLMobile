@@ -27,6 +27,8 @@ const RingkasanLogistikScreen = () => {
       year: 'numeric',
     });
   });
+
+  console.log(JSON.stringify(detail, null, 2));
   return (
     <>
       {loading && <LoadingModal />}
@@ -54,27 +56,24 @@ const RingkasanLogistikScreen = () => {
           </View>
           <View marginY={4}>
             <Text mb={1} color={'rgba(97, 97, 97, 1)'}>
-              Logistik
+              Klasifikasi
             </Text>
             <Text
               fontWeight={'semibold'}
               fontSize={16}
               mb={1}
               color={'rgba(97, 97, 97, 1)'}>
-              {detail.nama}
+              {detail.klasifikasi}
             </Text>
             <Text mb={1} color={'rgba(97, 97, 97, 1)'}>
-              {detail.keterangan}
-            </Text>
-            <Text mb={1} color={'rgba(97, 97, 97, 1)'}>
-              batas waktu
+              Jenis Alat Peraga
             </Text>
             <Text
               fontWeight={'semibold'}
               fontSize={16}
               mb={1}
               color={'rgba(97, 97, 97, 1)'}>
-              {dateToString(detail.deadline)}
+              {detail.jenis}
             </Text>
             <Text mb={1} color={'rgba(97, 97, 97, 1)'}>
               Laporan
