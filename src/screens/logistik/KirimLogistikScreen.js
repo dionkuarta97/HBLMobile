@@ -87,8 +87,8 @@ const KirimLogistikScreen = () => {
               laporan === ''
                 ? '#B1B1B1'
                 : pressed
-                ? 'rgba(0, 77, 153, 0.8)'
-                : 'rgba(0, 77, 153, 1)',
+                ? 'rgba(220, 53, 69, 0.8)'
+                : 'rgba(220, 53, 69, 1)',
           },
         ]}>
         <Text color={'white'}>Selanjutnya</Text>

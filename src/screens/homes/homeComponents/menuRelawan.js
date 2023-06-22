@@ -9,7 +9,7 @@ const MenuRelawan = ({
   navigation,
 }) => {
   return (
-    <View flexWrap={'wrap'} flexDirection={'row'}>
+    <View flexWrap={'wrap'} mt={8} flexDirection={'row'}>
       <View
         style={{
           width: '25%',
@@ -46,9 +46,10 @@ const MenuRelawan = ({
             <View
               style={{
                 position: 'absolute',
-                bottom: -8,
-                right: -5,
-                backgroundColor: 'rgba(0, 77, 153, 1)',
+                top: -10,
+                right: -8,
+                backgroundColor: 'rgba(220, 53, 69, 1)',
+                elevation: 4,
                 width: 22,
                 height: 22,
                 justifyContent: 'center',
@@ -101,9 +102,10 @@ const MenuRelawan = ({
             <View
               style={{
                 position: 'absolute',
-                bottom: -8,
-                right: -5,
-                backgroundColor: 'rgba(0, 77, 153, 1)',
+                top: -10,
+                right: -8,
+                backgroundColor: 'rgba(220, 53, 69, 1)',
+                elevation: 4,
                 width: 22,
                 height: 22,
                 justifyContent: 'center',
@@ -156,9 +158,10 @@ const MenuRelawan = ({
             <View
               style={{
                 position: 'absolute',
-                bottom: -8,
-                right: -5,
-                backgroundColor: 'rgba(0, 77, 153, 1)',
+                top: -10,
+                right: -8,
+                backgroundColor: 'rgba(220, 53, 69, 1)',
+                elevation: 4,
                 width: 22,
                 height: 22,
                 justifyContent: 'center',
@@ -211,9 +214,10 @@ const MenuRelawan = ({
             <View
               style={{
                 position: 'absolute',
-                bottom: -8,
-                right: -5,
-                backgroundColor: 'rgba(0, 77, 153, 1)',
+                top: -10,
+                right: -8,
+                backgroundColor: 'rgba(220, 53, 69, 1)',
+                elevation: 4,
                 width: 22,
                 height: 22,
                 justifyContent: 'center',

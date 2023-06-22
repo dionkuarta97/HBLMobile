@@ -1,4 +1,4 @@
-package com.hblmobile;
+package com.frankowanko.id;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

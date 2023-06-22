@@ -9,11 +9,11 @@ const LoadingModal = ({text = 'Mohon tunggu'}) => {
         <View style={styles.dimBackground} />
         <View style={styles.body}>
           <ActivityIndicator
-            color={'rgba(0, 77, 153, 1)'}
+            color={'rgba(220, 53, 69, 1)'}
             size={'large'}
             animating={true}
           />
-          <Text color={'rgba(0, 77, 153, 1)'} mt={2}>
+          <Text color={'rgba(220, 53, 69, 1)'} mt={2}>
             {text}
           </Text>
         </View>
