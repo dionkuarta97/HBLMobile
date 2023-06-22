@@ -4,6 +4,7 @@ import {
   SET_ANSWER_SURVEY,
   SET_CALEG,
   SET_PARTAI,
+  SET_PENUGASAN,
   SET_SURVEY,
   SET_SURVEY_BODY,
   SET_SURVEY_KHUSUS,
@@ -194,4 +195,26 @@ export const insertAnswerKhusus = body => {
       rejected('gagal');
     }
   });
+};
+
+export const setPenugasan = payload => {
+  return {
+    type: SET_PENUGASAN,
+    payload,
+  };
+};
+
+export const getPenugasan = id => {
+  return async (dispatch, getState) => {
+    try {
+      const {data} = await dionServer({
+        url: '/survey/penugasan/' + id,
+        method: 'get',
+      });
+      console.log(data);
+      dispatch(setPenugasan(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
