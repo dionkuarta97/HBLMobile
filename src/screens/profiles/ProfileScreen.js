@@ -250,9 +250,13 @@ const ProfileScreen = () => {
         <Text color={'rgba(117, 117, 117, 1)'} mt={2}>
           Pengaturan
         </Text>
-        <View marginY={5}>
-          <PengaturanButton name={'Ganti Password'} />
-          <PengaturanButton name={'Pusat Bantuan'} />
+        <View marginTop={3} mb={8}>
+          <PengaturanButton
+            onPress={() => {
+              navigation.navigate('PusatBantuanScreen');
+            }}
+            name={'Pusat Bantuan'}
+          />
         </View>
         <PengaturanButton
           onPress={() => {
@@ -266,7 +270,7 @@ const ProfileScreen = () => {
           mb={8}
           flexDirection={'row'}
           alignItems={'center'}
-          paddingY={4}
+          paddingY={20}
           paddingX={12}>
           <Image
             source={require('../../../assets/logo.png')}

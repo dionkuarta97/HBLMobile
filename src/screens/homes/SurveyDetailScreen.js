@@ -17,7 +17,7 @@ const SurveyDetailScreen = () => {
   const route = useRoute();
   const dispatch = useDispatch();
   const [idx, setIndex] = useState(0);
-  const {detail} = route.params;
+  const {detail, id_daerah} = route.params;
   const [answer, setAnswer] = useState(null);
   const {answerSurvey, surveyOffline, surveyBody} = useSelector(
     state => state.surveyReducer,
@@ -137,6 +137,7 @@ const SurveyDetailScreen = () => {
               if (val) {
                 kirimSurvey({
                   answer: answerSurvey,
+                  id_daerah: id_daerah,
                   id_pengisi: user.id,
                   id_survey: detail.id,
                   latitude: location.latitude,
@@ -159,6 +160,7 @@ const SurveyDetailScreen = () => {
                       id_local: surveyOffline.length + 1,
                       answer: answerSurvey,
                       id_pengisi: user.id,
+                      id_daerah: id_daerah,
                       id_survey: detail.id,
                       latitude: location.latitude,
                       longtitude: location.longtitude,

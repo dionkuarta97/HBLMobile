@@ -7,12 +7,15 @@ import {checkInternet, getLocation, heigth} from '../../../Helper';
 import {useState} from 'react';
 import LoadingModal from '../../../components/ModalLoading';
 import {setLocation} from '../../../states/home/homeAction';
+import BottomSheetPenugasan from './BottomSheetPenugasan';
 
 const SurveyAktif = ({data}) => {
   const navigation = useNavigation();
   const route = useRoute();
   const {location} = useSelector(state => state.homeReducer);
-
+  const {user} = useSelector(state => state.authReducer);
+  const [show, setShow] = useState(false);
+  const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -27,48 +30,113 @@ const SurveyAktif = ({data}) => {
         />
       )}
       {loading && <LoadingModal />}
+      <BottomSheetPenugasan
+        userId={user.id}
+        onPress={id => {
+          setShow(false);
+          setLoading(true);
+          checkInternet().then(val => {
+            if (val) {
+              getLocation()
+                .then(data => {
+                  if (data) {
+                    dispatch(
+                      setLocation({
+                        latitude: data.coords.latitude,
+                        longtitude: data.coords.longitude,
+                      }),
+                    );
+                    navigation.navigate('SurveyDetailScreen', {
+                      detail: detail,
+                      id_daerah: id,
+                    });
+                  }
+                })
+                .catch(err => {
+                  console.log(err, 'err');
+                  Alert.alert(
+                    'Warning',
+                    'Anda perlu mengaktifkan perizinan lokasi untuk melakukan survey',
+                  );
+                })
+                .finally(() => {
+                  setLoading(false);
+                });
+            } else {
+              if (!location) {
+                console.log(location);
+                Alert.alert(
+                  'Warning',
+                  'Anda perlu mengaktifkan perizinan lokasi untuk melakukan survey',
+                );
+              } else {
+                navigation.navigate('SurveyDetailScreen', {
+                  detail: detail,
+                  id_daerah: id,
+                });
+              }
+              setLoading(false);
+            }
+          });
+        }}
+        isOpen={show}
+        onClose={() => setShow(false)}
+      />
       <Text mb={4} color={'rgba(117, 117, 117, 1)'}>
         {data?.length} Survey
       </Text>
       {data?.map((el, idx) => (
         <Pressable
           onPress={() => {
-            setLoading(true);
-            checkInternet().then(val => {
-              if (val) {
-                getLocation()
-                  .then(data => {
-                    if (data) {
-                      dispatch(
-                        setLocation({
-                          latitude: data.coords.latitude,
-                          longtitude: data.coords.longitude,
-                        }),
+            if (user.role === '2') {
+              setDetail(el);
+              setShow(true);
+            } else {
+              setLoading(true);
+              checkInternet().then(val => {
+                if (val) {
+                  getLocation()
+                    .then(data => {
+                      if (data) {
+                        dispatch(
+                          setLocation({
+                            latitude: data.coords.latitude,
+                            longtitude: data.coords.longitude,
+                          }),
+                        );
+                        navigation.navigate('SurveyDetailScreen', {
+                          detail: el,
+                          id_daerah: user.id_kelurahan,
+                        });
+                      }
+                    })
+                    .catch(err => {
+                      console.log(err, 'err');
+                      Alert.alert(
+                        'Warning',
+                        'Anda perlu mengaktifkan perizinan lokasi untuk melakukan survey',
                       );
-                      navigation.navigate('SurveyDetailScreen', {detail: el});
-                    }
-                  })
-                  .catch(err => {
+                    })
+                    .finally(() => {
+                      setLoading(false);
+                    });
+                } else {
+                  if (!location) {
+                    console.log(location);
                     Alert.alert(
                       'Warning',
                       'Anda perlu mengaktifkan perizinan lokasi untuk melakukan survey',
                     );
-                  })
-                  .finally(() => {
-                    setLoading(false);
-                  });
-              } else {
-                if (!location) {
-                  Alert.alert(
-                    'Warning',
-                    'Anda perlu mengaktifkan perizinan lokasi untuk melakukan survey',
-                  );
-                } else {
-                  navigation.navigate('SurveyDetailScreen', {detail: el});
+                  } else {
+                    navigation.navigate('SurveyDetailScreen', {
+                      detail: el,
+                      id_daerah: user.id_kelurahan,
+                    });
+                  }
+                  setLoading(false);
                 }
-                setLoading(false);
-              }
-            });
+              });
+            }
           }}
           style={({pressed}) => [
             {

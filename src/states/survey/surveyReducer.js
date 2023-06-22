@@ -3,6 +3,7 @@ import {
   SET_ANSWER_SURVEY,
   SET_CALEG,
   SET_PARTAI,
+  SET_PENUGASAN,
   SET_SURVEY,
   SET_SURVEY_BODY,
   SET_SURVEY_KHUSUS,
@@ -13,6 +14,7 @@ const initialState = {
   listSurvey: checkStorage('listSurvey', null, 'string'),
   surveyOffline: checkStorage('surveyOffline', [], 'string'),
   surveyBody: checkStorage('surveyBody', [], 'string'),
+  penugasan: checkStorage('penugasan', [], 'string'),
   answerSurvey: null,
   listPartai: null,
   listCaleg: null,
@@ -50,6 +52,9 @@ const surveyReducer = (state = initialState, action) => {
     return {...state, surveyKhusus: action.payload};
   } else if (action.type === SET_CALEG) {
     return {...state, listCaleg: action.payload};
+  } else if (action.type === SET_PENUGASAN) {
+    setStorage('penugasan', JSON.stringify(action.payload));
+    return {...state, penugasan: action.payload};
   }
   return state;
 };

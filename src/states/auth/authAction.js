@@ -1,7 +1,7 @@
 import dionServer from '../dionServer';
 import {SET_VIDEO_ID} from '../home/homeTypes';
 import server from '../server';
-import {SET_LOGIN, SET_REFERAL, SET_USER} from './authTypes';
+import {SET_BANTUAN, SET_LOGIN, SET_REFERAL, SET_USER} from './authTypes';
 
 export const setUser = payload => {
   return {
@@ -181,4 +181,25 @@ export const getKelurahan = payload => {
       rejected('terjadi kesalahan pada server');
     }
   });
+};
+
+export const setBantuan = payload => {
+  return {
+    type: SET_BANTUAN,
+    payload,
+  };
+};
+
+export const getBantuan = () => {
+  return async (dispatch, getState) => {
+    try {
+      const {data} = await dionServer({
+        url: '/bantuan',
+        method: 'GET',
+      });
+      dispatch(setBantuan(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
