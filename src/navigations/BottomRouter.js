@@ -17,7 +17,7 @@ const menus = [
           <Text
             fontSize={13}
             mb={2}
-            color={focused ? 'rgba(0, 77, 153, 1)' : 'black'}>
+            color={focused ? 'rgba(220, 53, 69, 1)' : 'black'}>
             Home
           </Text>
         );
@@ -52,7 +52,7 @@ const menus = [
           <Text
             mb={2}
             fontSize={13}
-            color={focused ? 'rgba(0, 77, 153, 1)' : 'black'}>
+            color={focused ? 'rgba(220, 53, 69, 1)' : 'black'}>
             Profil
           </Text>
         );

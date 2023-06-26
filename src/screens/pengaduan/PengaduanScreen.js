@@ -80,8 +80,8 @@ const PengaduanScreen = () => {
           style={({pressed}) => [
             {
               backgroundColor: pressed
-                ? 'rgba(0, 77, 153, 0.7)'
-                : 'rgba(0, 77, 153, 1)',
+                ? 'rgba(220, 53, 69, 0.8)'
+                : 'rgba(220, 53, 69, 1)',
               transform: [
                 {
                   scale: pressed ? 0.98 : 1,

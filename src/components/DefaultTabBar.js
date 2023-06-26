@@ -25,7 +25,7 @@ const DefaultTabBar = props => {
       renderTabBar={item => (
         <TabBar
           {...item}
-          indicatorStyle={{backgroundColor: '#004D99'}}
+          indicatorStyle={{backgroundColor: 'rgba(220, 53, 69, 1)'}}
           tabStyle={{
             width: Dimensions.get('window').width / routes.length,
           }}
@@ -33,7 +33,7 @@ const DefaultTabBar = props => {
           renderLabel={({route, focused, color}) => (
             <Text
               style={{
-                color: focused ? 'rgba(0, 77, 153, 1)' : '#9B9B9B',
+                color: focused ? 'rgba(220, 53, 69, 1)' : '#9B9B9B',
                 fontSize: Dimensions.get('screen').width / 27,
                 fontWeight: 'bold',
                 alignSelf: 'center',

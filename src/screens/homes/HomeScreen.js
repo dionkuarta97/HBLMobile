@@ -9,7 +9,6 @@ import {
 import {launchCamera} from 'react-native-image-picker';
 import {checkInternet, getLocation, heigth, width} from '../../Helper';
 import {useDispatch, useSelector} from 'react-redux';
-import HomeCarousel from './homeComponents/HomeCarousel';
 import {
   useFocusEffect,
   useIsFocused,
@@ -71,15 +70,15 @@ const HomeScreen = () => {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: 'rgba(200, 228, 255, 0.4)',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}>
       <ScrollView style={{flex: 1}}>
         {loading && <LoadingModal />}
         <View
           shadow={3}
           paddingTop={10}
-          paddingBottom={user?.role !== 1 ? 0 : 6}
-          bg={'white'}>
+          paddingBottom={user?.role === '1' ? 6 : 0}
+          bg={'rgba(216, 32, 40, 1)'}>
           <View flexDirection={'row'}>
             <View width={'50%'} alignItems={'center'}>
               <Image
@@ -97,42 +96,20 @@ const HomeScreen = () => {
               justifyContent={'center'}
               alignItems={'center'}>
               <View alignItems={'flex-end'}>
-                <Text fontWeight={'semibold'} color={'rgba(0, 77, 153, 1)'}>
+                <Text numberOfLines={1} fontWeight={'semibold'} color={'white'}>
                   Halo,{' '}
                   <Text fontWeight={'normal'}>
-                    {user?.jk === 'Laki - laki' ? 'Bapak' : 'ibu'}
+                    {user?.jk === 'Laki - laki' ? 'Bapak' : 'ibu'} {user?.nama}
                   </Text>
                 </Text>
-                <Text numberOfLines={1} color={'rgba(0, 77, 153, 1)'}>
-                  {user?.nama}
-                </Text>
               </View>
-              <Image
-                source={require('../../../assets/person.png')}
-                style={{
-                  width: width / 8,
-                  resizeMode: 'contain',
-                  height: heigth / 24,
-                }}
-              />
             </View>
           </View>
-          <View
-            borderTopWidth={0.8}
-            mt={4}
-            borderColor={'rgba(0, 77, 153, 1)'}
-            alignSelf={'center'}
-            width={width / 1.2}
-          />
+
           {user?.role !== '1' && <JumlahPemilh />}
         </View>
         <View padding={4} flex={1}>
-          <View
-            bg={'white'}
-            paddingY={5}
-            borderRadius={8}
-            shadow={1}
-            marginTop={4}>
+          <View paddingY={5} marginTop={4}>
             {user?.role === '1' && (
               <MenuPemilih
                 navigation={navigation}
@@ -184,7 +161,10 @@ const HomeScreen = () => {
                   navigation.navigate('SurveyKhususScreen');
                 }}
                 mt={8}
-                bg={'rgba(0, 77, 153, 1)'}
+                _pressed={{
+                  bg: 'rgba(220, 53, 69, 0.8)',
+                }}
+                bg={'rgba(220, 53, 69, 1)'}
                 width={width / 1.4}
                 justifyContent={'center'}
                 alignSelf={'center'}
@@ -196,28 +176,28 @@ const HomeScreen = () => {
             )}
           </View>
         </View>
-        <HomeCarousel />
+
         <View padding={4} bg={'white'} flex={1}>
-          <View mb={4} alignItems={'center'} flexDirection={'row'}>
+          <View mb={4}>
             <Text fontWeight={'semibold'} fontSize={16}>
-              Berita dari Hillary
+              Berita dari Franko
             </Text>
-            <Pressable
-              onPress={() => navigation.navigate('BeritaScreen')}
-              style={({pressed}) => [
-                {
-                  opacity: pressed ? 0.7 : 1,
-                  marginLeft: 'auto',
-                  borderBottomWidth: 1,
-                  borderColor: pressed
-                    ? 'rgba(0, 77, 153, 1)'
-                    : 'rgba(0, 77, 153, 0)',
-                },
-              ]}>
-              <Text color={'rgba(0, 77, 153, 1)'}>lihat semua berita</Text>
-            </Pressable>
           </View>
           <DashboardBerita />
+          <Pressable
+            onPress={() => navigation.navigate('BeritaScreen')}
+            style={({pressed}) => [
+              {
+                opacity: pressed ? 0.7 : 1,
+                alignSelf: 'center',
+                borderBottomWidth: 1,
+                borderColor: pressed
+                  ? 'rgba(220, 53, 69, 1)'
+                  : 'rgba(220, 53, 69, 0)',
+              },
+            ]}>
+            <Text color={'rgba(216, 32, 40, 1)'}>lihat semua berita</Text>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>

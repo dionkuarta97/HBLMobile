@@ -1,4 +1,4 @@
-package com.hblmobile;
+package com.frankowanko.id;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -16,7 +16,7 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected String getMainComponentName() {
-    return "HBLMobile";
+    return "Franko Wanko";
   }
 
   @Override

@@ -3,7 +3,6 @@ import globalStyles from '../../GlobalStyles';
 import {heigth, width} from '../../Helper';
 import LinearGradient from 'react-native-linear-gradient';
 import splashScreenMiddle from '../../../assets/splashScreenMiddle.png';
-import splashScreenBot from '../../../assets/splashScreenBot.png';
 import {useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -29,16 +28,17 @@ const SplashScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView style={globalStyles.container}>
-      <LinearGradient
-        colors={['#004D99', '#03417E']}
-        style={style.linearGradientStyle}>
-        <Image
-          style={style.splashScreenMiddleStyle}
-          source={splashScreenMiddle}
-        />
-        <Image style={style.splashScreenBotStyle} source={splashScreenBot} />
-      </LinearGradient>
+    <SafeAreaView
+      style={[
+        globalStyles.container,
+        {
+          backgroundColor: 'rgba(220, 53, 69, 1)',
+        },
+      ]}>
+      <Image
+        style={style.splashScreenMiddleStyle}
+        source={splashScreenMiddle}
+      />
     </SafeAreaView>
   );
 };
@@ -55,6 +55,7 @@ const style = StyleSheet.create({
     resizeMode: 'contain',
     height: heigth / 6,
     flex: 1,
+    alignSelf: 'center',
   },
   splashScreenBotStyle: {
     width: width,

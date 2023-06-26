@@ -36,8 +36,8 @@ const BottomLogistik = ({isOpen, onClose}) => {
               paddingVertical: 8,
               borderRadius: 6,
               backgroundColor: pressed
-                ? 'rgba(0, 77, 153, 0.7)'
-                : 'rgba(0, 77, 153, 1)',
+                ? 'rgba(220, 53, 69, 0.7)'
+                : 'rgba(220, 53, 69, 1)',
             },
           ]}>
           <Text color={'rgba(255, 255, 255, 1)'}>Mengerti</Text>

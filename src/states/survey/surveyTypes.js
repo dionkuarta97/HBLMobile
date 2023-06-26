@@ -5,3 +5,4 @@ export const SET_SURVEY_BODY = 'set survey body';
 export const SET_PARTAI = 'set partai';
 export const SET_SURVEY_KHUSUS = 'set survey khusus';
 export const SET_CALEG = 'set caleg';
+export const SET_PENUGASAN = 'set penugasan';

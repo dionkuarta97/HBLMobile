@@ -40,9 +40,10 @@ const MenuPemilih = ({survey, pengaduan, navigation}) => {
             <View
               style={{
                 position: 'absolute',
-                bottom: -8,
-                right: -5,
-                backgroundColor: 'rgba(0, 77, 153, 1)',
+                top: -10,
+                right: -8,
+                backgroundColor: 'rgba(220, 53, 69, 1)',
+                elevation: 4,
                 width: 22,
                 height: 22,
                 justifyContent: 'center',
@@ -95,9 +96,10 @@ const MenuPemilih = ({survey, pengaduan, navigation}) => {
             <View
               style={{
                 position: 'absolute',
-                bottom: -8,
-                right: -5,
-                backgroundColor: 'rgba(0, 77, 153, 1)',
+                top: -10,
+                right: -8,
+                backgroundColor: 'rgba(220, 53, 69, 1)',
+                elevation: 4,
                 width: 22,
                 height: 22,
                 justifyContent: 'center',

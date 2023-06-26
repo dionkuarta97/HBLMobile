@@ -17,7 +17,7 @@ const SurveyDetailScreen = () => {
   const route = useRoute();
   const dispatch = useDispatch();
   const [idx, setIndex] = useState(0);
-  const {detail} = route.params;
+  const {detail, id_daerah} = route.params;
   const [answer, setAnswer] = useState(null);
   const {answerSurvey, surveyOffline, surveyBody} = useSelector(
     state => state.surveyReducer,
@@ -67,7 +67,7 @@ const SurveyDetailScreen = () => {
             width={'20%'}
             alignItems={'center'}
             borderRadius={5}
-            bg={'rgba(0, 77, 153, 1)'}
+            bg={'rgba(220, 53, 69, 1)'}
             paddingY={4}>
             <Text fontWeight={'semibold'} color={'white'}>
               {idx + 1 + '/' + detail.question.length}
@@ -137,6 +137,7 @@ const SurveyDetailScreen = () => {
               if (val) {
                 kirimSurvey({
                   answer: answerSurvey,
+                  id_daerah: id_daerah,
                   id_pengisi: user.id,
                   id_survey: detail.id,
                   latitude: location.latitude,
@@ -159,6 +160,7 @@ const SurveyDetailScreen = () => {
                       id_local: surveyOffline.length + 1,
                       answer: answerSurvey,
                       id_pengisi: user.id,
+                      id_daerah: id_daerah,
                       id_survey: detail.id,
                       latitude: location.latitude,
                       longtitude: location.longtitude,
@@ -184,8 +186,8 @@ const SurveyDetailScreen = () => {
             backgroundColor: !answer
               ? '#B1B1B1'
               : pressed
-              ? 'rgba(0, 77, 153, 0.8)'
-              : 'rgba(0, 77, 153, 1)',
+              ? 'rgba(220, 53, 69, 0.8)'
+              : 'rgba(220, 53, 69, 1)',
           },
         ]}>
         <Text color={'white'}>
