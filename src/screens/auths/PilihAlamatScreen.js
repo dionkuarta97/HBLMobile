@@ -12,6 +12,7 @@ import DefaultModal from '../../components/DefaultModal';
 import {useDispatch} from 'react-redux';
 import {registerUser} from '../../states/auth/authAction';
 import OnTapTextInput from '../../components/OnTapTextInput';
+import LoadingModal from '../../components/ModalLoading';
 
 const PilihAlamatScreen = () => {
   const route = useRoute();
@@ -23,6 +24,7 @@ const PilihAlamatScreen = () => {
   const [idKelurahan, setIdKelurahan] = useState(null);
   const [alamat, setAlamat] = useState('');
   const [showModalSukses, setShowModalSukses] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   const [showKab, setShowKab] = useState(false);
@@ -76,6 +78,7 @@ const PilihAlamatScreen = () => {
 
   return (
     <SafeAreaView style={globalStyles.container}>
+      {loading && <LoadingModal />}
       {showModalSukses && (
         <DefaultModal>
           <Image
@@ -235,7 +238,10 @@ const PilihAlamatScreen = () => {
                 handleShowModalSukses(true);
               })
               .catch(err => {
-                console.log(err);
+                Alert.alert(
+                  'Error',
+                  'terjadi kesalahan / email yg anda gunakan sudah terdaftar',
+                );
               })
               .finally(() => {
                 setLoading(false);
