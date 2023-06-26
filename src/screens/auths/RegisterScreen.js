@@ -104,8 +104,8 @@ const RegisterScreen = () => {
                 width: width / 1.6,
                 alignItems: 'center',
                 backgroundColor: pressed
-                  ? 'rgba(0, 77, 153, 0.8)'
-                  : 'rgba(0, 77, 153, 1)',
+                  ? 'rgba(220, 53, 69, 0.8)'
+                  : 'rgba(220, 53, 69, 1)',
                 padding: 15,
                 borderRadius: 8,
               },
@@ -149,8 +149,8 @@ const RegisterScreen = () => {
                 width: width / 1.6,
                 alignItems: 'center',
                 backgroundColor: pressed
-                  ? 'rgba(0, 77, 153, 0.8)'
-                  : 'rgba(0, 77, 153, 1)',
+                  ? 'rgba(220, 53, 69, 0.8)'
+                  : 'rgba(220, 53, 69, 1)',
                 padding: 15,
                 borderRadius: 8,
               },
@@ -178,7 +178,7 @@ const RegisterScreen = () => {
             inputMode="numeric"
           />
           <DefaultInput
-            placeholder={'cth. Hilary Brigitta Lasut'}
+            placeholder={'cth. Franko Wangko'}
             label={'Nama Lengkap'}
             name={'nama'}
             handleChange={handleChange}
@@ -194,7 +194,7 @@ const RegisterScreen = () => {
           </Text>
           <Select
             _selectedItem={{
-              bg: 'rgba(0, 77, 153, 1)',
+              bg: 'rgba(220, 53, 69, 1)',
               _text: {
                 color: 'white',
               },
@@ -247,7 +247,7 @@ const RegisterScreen = () => {
             inputMode="numeric"
           />
           <DefaultInput
-            placeholder={'cth. hillarylasut@gmail.com'}
+            placeholder={'cth. franko.wangko@gmail.com'}
             label={'Email'}
             name={'email'}
             handleChange={handleChange}
@@ -293,8 +293,8 @@ const RegisterScreen = () => {
             backgroundColor: !checkInput()
               ? '#B1B1B1'
               : pressed
-              ? 'rgba(0, 77, 153, 0.8)'
-              : 'rgba(0, 77, 153, 1)',
+              ? 'rgba(220, 53, 69, 0.8)'
+              : 'rgba(220, 53, 69, 1)',
             padding: 15,
             borderRadius: 8,
           },
@@ -327,13 +327,13 @@ const RegisterScreen = () => {
             {
               borderBottomWidth: 1,
               borderColor: pressed
-                ? 'rgba(0, 77, 153, 1)'
-                : 'rgba(0, 77, 153, 0)',
+                ? 'rgba(220, 53, 69, 1)'
+                : 'rgba(220, 53, 69, 0)',
             },
           ]}>
           <Text
             style={{
-              color: 'rgba(0, 77, 153, 1)',
+              color: 'rgba(220, 53, 69, 1)',
             }}>
             masuk
           </Text>

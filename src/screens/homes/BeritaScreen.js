@@ -71,7 +71,7 @@ const BeritaScreen = () => {
         ))}
         {loading && (
           <View padding={5}>
-            <ActivityIndicator color={'rgba(0, 77, 153, 1)'} size={30} />
+            <ActivityIndicator color={'rgba(220, 53, 69, 1)'} size={30} />
           </View>
         )}
       </ScrollView>

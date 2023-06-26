@@ -64,7 +64,7 @@ const ProfileScreen = () => {
           alignItems={'center'}
           flexDirection={'row'}
           paddingX={8}
-          bg={'rgba(0, 77, 153, 1)'}
+          bg={'rgba(220, 53, 69, 1)'}
           marginTop={2}>
           <View>
             <Text color={'white'}>Referal code</Text>
@@ -194,8 +194,8 @@ const ProfileScreen = () => {
                     code === ''
                       ? '#B1B1B1'
                       : pressed
-                      ? 'rgba(0, 77, 153, 0.7)'
-                      : 'rgba(0, 77, 153, 1)',
+                      ? 'rgba(220, 53, 69, 0.8)'
+                      : 'rgba(220, 53, 69, 1)',
                 },
               ]}>
               <Text fontWeight={'semibold'} color={'white'}>
@@ -207,7 +207,7 @@ const ProfileScreen = () => {
         {user?.referrer_to !== '' && (
           <View
             borderWidth={0.8}
-            borderColor={'rgba(0, 77, 153, 1)'}
+            borderColor={'rgba(220, 53, 69, 1)'}
             borderRadius={8}
             p={4}>
             <Text>Behasil Tersambung</Text>
@@ -266,26 +266,15 @@ const ProfileScreen = () => {
           }}
           name={'Log out'}
         />
-        <View
-          mb={8}
-          flexDirection={'row'}
-          alignItems={'center'}
-          paddingY={20}
-          paddingX={12}>
+        <View mb={8} mt={8} alignItems={'center'} paddingY={5} paddingX={12}>
           <Image
-            source={require('../../../assets/logo.png')}
+            source={require('../../../assets/headerLogin.png')}
             style={{
-              width: width / 6,
+              width: width / 2,
               resizeMode: 'contain',
               height: heigth / 18,
             }}
           />
-          <Text color={'rgba(0, 77, 153, 1)'} ml={2}>
-            {'Hillary\nBrigitta Lasut'}
-          </Text>
-          <Text marginLeft={'auto'} color={'rgba(0, 77, 153, 1)'} ml={2}>
-            v 1.0
-          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>

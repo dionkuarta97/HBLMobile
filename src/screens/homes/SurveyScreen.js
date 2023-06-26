@@ -31,6 +31,8 @@ const SurveyScreen = () => {
     setTab(val);
   });
 
+  console.log(JSON.stringify(listSurvey, null, 2));
+
   return (
     <SafeAreaView style={globalStyles.container}>
       <DefaultTabBar

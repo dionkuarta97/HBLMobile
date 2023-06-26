@@ -16,7 +16,7 @@ const BeritaCard = ({data, navigation}) => {
         },
       ]}>
       <Image
-        source={{uri: 'https://hillarybrigitta.id/upload/info/' + data.path}}
+        source={{uri: 'https://masa-depan.id/upload/info/' + data.path}}
         style={{
           resizeMode: 'cover',
           width: '33%',

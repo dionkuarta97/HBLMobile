@@ -15,7 +15,7 @@ const DetailBerita = () => {
     <SafeAreaView style={globalStyles.container}>
       <ScrollView padding={4}>
         <Image
-          source={{uri: 'https://hillarybrigitta.id/upload/info/' + data.path}}
+          source={{uri: 'https://masa-depan.id/upload/info/' + data.path}}
           style={{
             resizeMode: 'cover',
             width: '100%',

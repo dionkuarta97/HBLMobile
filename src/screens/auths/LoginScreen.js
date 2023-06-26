@@ -103,13 +103,13 @@ const LoginScreen = () => {
                   marginTop: 15,
                   borderBottomWidth: 1,
                   borderColor: pressed
-                    ? 'rgba(0, 77, 153, 1)'
-                    : 'rgba(0, 77, 153, 0)',
+                    ? 'rgba(220, 53, 69, 1)'
+                    : 'rgba(220, 53, 69, 0)',
                 },
               ]}>
               <Text
                 style={{
-                  color: 'rgba(0, 77, 153, 1)',
+                  color: 'rgba(150, 150, 150, 1)',
                 }}>
                 Lupa Password?
               </Text>
@@ -149,8 +149,8 @@ const LoginScreen = () => {
                 width: width / 1.2,
                 alignItems: 'center',
                 backgroundColor: pressed
-                  ? 'rgba(0, 77, 153, 0.8)'
-                  : 'rgba(0, 77, 153, 1)',
+                  ? 'rgba(220, 53, 69, 0.8)'
+                  : 'rgba(220, 53, 69, 1)',
                 padding: 15,
                 borderRadius: 8,
               },
@@ -183,13 +183,13 @@ const LoginScreen = () => {
                 {
                   borderBottomWidth: 1,
                   borderColor: pressed
-                    ? 'rgba(0, 77, 153, 1)'
-                    : 'rgba(0, 77, 153, 0)',
+                    ? 'rgba(220, 53, 69, 1)'
+                    : 'rgba(220, 53, 69, 0)',
                 },
               ]}>
               <Text
                 style={{
-                  color: 'rgba(0, 77, 153, 1)',
+                  color: 'rgba(220, 53, 69, 1)',
                 }}>
                 daftar
               </Text>

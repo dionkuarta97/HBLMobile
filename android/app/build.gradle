@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.hblmobile"
+    namespace "com.frankowanko.id"
     defaultConfig {
-        applicationId "com.hblmobile"
+        applicationId "com.frankowanko.id"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

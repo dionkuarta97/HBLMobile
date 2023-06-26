@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'https://hillarybrigitta.id/api/index.php/hbl',
+  baseURL: 'https://masa-depan.id/api_2/index.php/masa_depan',
 });

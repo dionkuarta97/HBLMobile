@@ -43,7 +43,7 @@ const SelectKecamatan = props => {
       </View>
       {loading ? (
         <ActivityIndicator
-          color={'rgba(0, 77, 153, 1)'}
+          color={'rgba(220, 53, 69, 1)'}
           size={'large'}
           animating={true}
         />
