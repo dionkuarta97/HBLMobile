@@ -28,7 +28,7 @@ const BottomSheetPenugasan = ({isOpen, onClose, onPress, userId}) => {
           />
         )}
         <ScrollView width={width / 1.1} mt={4} flex={1}>
-          {penugasan.map((el, idx) => (
+          {penugasan?.map((el, idx) => (
             <Pressable
               key={idx}
               onPress={() => {

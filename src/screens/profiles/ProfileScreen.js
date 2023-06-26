@@ -266,12 +266,7 @@ const ProfileScreen = () => {
           }}
           name={'Log out'}
         />
-        <View
-          mb={8}
-          mt={heigth / 10}
-          alignItems={'center'}
-          paddingY={20}
-          paddingX={12}>
+        <View mb={8} mt={8} alignItems={'center'} paddingY={5} paddingX={12}>
           <Image
             source={require('../../../assets/headerLogin.png')}
             style={{

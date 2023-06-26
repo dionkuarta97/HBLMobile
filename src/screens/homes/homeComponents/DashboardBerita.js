@@ -32,7 +32,7 @@ const DashboardBerita = () => {
             ]}>
             <Image
               source={{
-                uri: 'https://hillarybrigitta.id/upload/info/' + el.path,
+                uri: 'https://masa-depan.id/upload/info/' + el.path,
               }}
               style={{
                 width: '100%',
