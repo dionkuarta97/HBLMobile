@@ -82,8 +82,8 @@ const ProfileScreen = () => {
             <Image
               source={require('../../../assets/icons/profile-active.png')}
               style={{
-                width: 40,
-                height: 40,
+                width: 60,
+                height: 60,
                 resizeMode: 'contain',
               }}
             />
@@ -91,8 +91,9 @@ const ProfileScreen = () => {
             <Image
               source={{uri: user?.path}}
               style={{
-                width: 40,
-                height: 40,
+                borderRadius: 100,
+                width: 60,
+                height: 60,
                 resizeMode: 'contain',
               }}
             />
