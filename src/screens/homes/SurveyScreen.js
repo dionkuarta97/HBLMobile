@@ -52,7 +52,7 @@ const SurveyScreen = () => {
         screen={[
           <SurveyAktif
             data={
-              user.role === 1
+              user.role === '1'
                 ? listSurvey?.survey.filter(
                     el =>
                       ![

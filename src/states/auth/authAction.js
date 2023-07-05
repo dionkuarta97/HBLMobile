@@ -1,5 +1,4 @@
 import dionServer from '../dionServer';
-import {SET_VIDEO_ID} from '../home/homeTypes';
 import server from '../server';
 import {SET_BANTUAN, SET_LOGIN, SET_REFERAL, SET_USER} from './authTypes';
 
@@ -88,14 +87,12 @@ export const inputReferal = body => {
           method: 'POST',
           data: body,
         });
-        if (data['0'] === 200) {
-          dispatch(getUser());
-          resolved(data.message);
-        } else {
-          rejected(data.message);
-        }
+        dispatch(getUser());
+        resolved(data.message);
       } catch (error) {
-        rejected('terjadi kesalahan pada server');
+        if (error.response.data) {
+          rejected(error.response.data.message);
+        } else rejected('terjadi kesalahan pada server');
       }
     });
   };

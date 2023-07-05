@@ -211,8 +211,11 @@ export const getPenugasan = id => {
         url: '/survey/penugasan/' + id,
         method: 'get',
       });
-      console.log(data);
-      dispatch(setPenugasan(data));
+      if (Array.isArray(data)) {
+        dispatch(setPenugasan(data));
+      } else {
+        dispatch(setPenugasan([]));
+      }
     } catch (error) {
       console.log(error);
     }

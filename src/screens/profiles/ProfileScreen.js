@@ -58,7 +58,7 @@ const ProfileScreen = () => {
           Profil
         </Text>
       </View>
-      {user?.role !== 1 && (
+      {user?.role !== '1' && (
         <View
           paddingY={4}
           alignItems={'center'}
