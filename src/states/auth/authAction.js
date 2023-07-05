@@ -86,18 +86,58 @@ export const inputReferal = body => {
         const {data} = await dionServer({
           url: '/user/referal',
           method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
           data: body,
         });
-        if (data['0'] === 200) {
-          dispatch(getUser());
-          resolved(data.message);
-        } else {
-          rejected(data.message);
-        }
+
+        dispatch(getUser());
+        resolved(data.message);
       } catch (error) {
-        rejected('terjadi kesalahan pada server');
+        if (error.response.data) {
+          rejected(error.response.data.message);
+        } else rejected('terjadi kesalahan pada server');
       }
     });
+  };
+};
+
+export const checkReferal = body => {
+  return async (dispatch, getState) => {
+    return new Promise(async (resolved, rejected) => {
+      try {
+        const {data} = await dionServer({
+          url: '/user/check',
+          method: 'POST',
+          data: body,
+        });
+
+        resolved(data.message);
+      } catch (error) {
+        if (error.response.data) {
+          rejected(error.response.data.message);
+        } else rejected('terjadi kesalahan pada server');
+      }
+    });
+  };
+};
+
+export const lastLogin = () => {
+  return async (dispatch, getState) => {
+    try {
+      const {id} = getState().authReducer.user;
+      await dionServer({
+        url: '/user/last',
+        method: 'POST',
+        data: {
+          id,
+        },
+      });
+      dispatch(getUser());
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -116,6 +156,7 @@ export const getPenghubung = code => {
         dispatch(setPenghubung(data));
         resolved('oe');
       } catch (error) {
+        console.log(role);
         rejected('terjadi kesalahan pada server');
       }
     });

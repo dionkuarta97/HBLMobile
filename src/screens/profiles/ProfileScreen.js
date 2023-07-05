@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, useToast} from 'native-base';
+import {View, Text, ScrollView, useToast, Center, HStack} from 'native-base';
 import {
   Alert,
   Image,
@@ -12,7 +12,9 @@ import {checkInternet, getLocation, heigth, width} from '../../Helper';
 import {useDispatch, useSelector} from 'react-redux';
 import PengaturanButton from './profileComponents/PengaturanButton';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import ImageView from 'react-native-image-viewing';
 import {
+  checkReferal,
   getPenghubung,
   inputReferal,
   setLogin,
@@ -22,15 +24,22 @@ import {useCallback, useState} from 'react';
 import LoadingModal from '../../components/ModalLoading';
 import {setLocation} from '../../states/home/homeAction';
 import Clipboard from '@react-native-clipboard/clipboard';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import DefaultModal from '../../components/DefaultModal';
 
 const ProfileScreen = () => {
   const {user, penghubung} = useSelector(state => state.authReducer);
   const {location} = useSelector(state => state.homeReducer);
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [image, setImage] = useState(null);
+
   const handleCode = useCallback(val => {
     setCode(val);
   });
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const toast = useToast();
@@ -40,6 +49,7 @@ const ProfileScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
+      setCode('');
       checkInternet().then(val => {
         if (val) {
           if (user?.referrer_to !== '') {
@@ -53,19 +63,64 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView style={globalStyles.container}>
       {loading && <LoadingModal />}
-      <View p={4}>
-        <Text fontWeight={'bold'} fontSize={18}>
-          Profil
+      <View alignItems={'center'} flexDirection={'row'} px={10} py={4}>
+        <Text
+          width={'50%'}
+          mr={'auto'}
+          numberOfLines={1}
+          fontWeight={'semibold'}>
+          Halo,{' '}
+          <Text fontWeight={'normal'}>
+            {user?.jk === 'Laki - laki' ? 'Bapak' : 'ibu'} {user?.nama}
+          </Text>
         </Text>
+        <TouchableOpacity
+          onPress={async () => {
+            setVisible(true);
+          }}>
+          {user?.path === '' ? (
+            <Image
+              source={require('../../../assets/icons/profile-active.png')}
+              style={{
+                width: 40,
+                height: 40,
+                resizeMode: 'contain',
+              }}
+            />
+          ) : (
+            <Image
+              source={{uri: user?.path}}
+              style={{
+                width: 40,
+                height: 40,
+                resizeMode: 'contain',
+              }}
+            />
+          )}
+        </TouchableOpacity>
       </View>
-      {user?.role !== 1 && (
+      {user?.path === '' ? (
+        <ImageView
+          images={[require('../../../assets/icons/profile-active.png')]}
+          imageIndex={0}
+          visible={visible}
+          onRequestClose={() => setVisible(false)}
+        />
+      ) : (
+        <ImageView
+          images={[{uri: user?.path}]}
+          imageIndex={0}
+          visible={visible}
+          onRequestClose={() => setVisible(false)}
+        />
+      )}
+      {user?.role !== '1' && (
         <View
           paddingY={4}
           alignItems={'center'}
           flexDirection={'row'}
           paddingX={8}
-          bg={'rgba(220, 53, 69, 1)'}
-          marginTop={2}>
+          bg={'rgba(220, 53, 69, 1)'}>
           <View>
             <Text color={'white'}>Referal code</Text>
           </View>
@@ -122,65 +177,105 @@ const ProfileScreen = () => {
               disabled={code === '' ? true : false}
               onPress={() => {
                 setLoading(true);
-                if (location) {
-                  dispatch(
-                    inputReferal({
-                      id: user?.id,
-                      code: code,
-                      latitude: location.latitude,
-                      longtitude: location.longtitude,
-                    }),
-                  )
-                    .then(val => {
-                      Alert.alert('sukses', val);
-                    })
-                    .catch(error => {
-                      console.log(error);
-                      Alert.alert('error', error);
-                    })
-                    .finally(() => {
-                      setLoading(false);
-                    });
-                } else {
-                  getLocation()
-                    .then(async data => {
-                      if (data) {
-                        dispatch(
-                          setLocation({
-                            latitude: data.coords.latitude,
-                            longtitude: data.coords.longitude,
-                          }),
-                        );
-                        dispatch(
-                          inputReferal({
-                            id: user?.id,
-                            code: code,
-                            latitude: data.coords.latitude,
-                            longtitude: data.coords.longitude,
-                          }),
-                        )
-                          .then(val => {
-                            Alert.alert('sukses', val);
-                          })
-                          .catch(error => {
-                            console.log(error);
-                            Alert.alert('error', error);
-                          })
-                          .finally(() => {
-                            setLoading(false);
-                          });
-                      }
-                    })
-                    .catch(err => {
-                      Alert.alert(
-                        'Warning',
-                        'Anda perlu mengaktifkan perizinan lokasi untuk melakukan survey',
-                      );
-                    })
-                    .finally(() => {
-                      setLoading(false);
-                    });
-                }
+                checkInternet().then(connect => {
+                  if (connect) {
+                    if (location) {
+                      dispatch(
+                        checkReferal({
+                          id: user?.id,
+                          code: code,
+                          latitude: location.latitude,
+                          longtitude: location.longtitude,
+                        }),
+                      )
+                        .then(val => {
+                          if (val === 'relawan') {
+                            dispatch(
+                              inputReferal({
+                                id: user?.id,
+                                code: code,
+                                latitude: location.latitude,
+                                longtitude: location.longtitude,
+                              }),
+                            )
+                              .then(val => {
+                                Alert.alert('sukses', val);
+                              })
+                              .finally(() => {
+                                setLoading(false);
+                              });
+                          } else {
+                            setShowModal(true);
+                          }
+                        })
+                        .catch(error => {
+                          console.log(error);
+                          Alert.alert('error', error);
+                          setLoading(false);
+                        });
+                    } else {
+                      getLocation()
+                        .then(async data => {
+                          if (data) {
+                            dispatch(
+                              setLocation({
+                                latitude: data.coords.latitude,
+                                longtitude: data.coords.longitude,
+                              }),
+                            );
+                            dispatch(
+                              checkReferal({
+                                id: user?.id,
+                                code: code,
+                                latitude: location.latitude,
+                                longtitude: location.longtitude,
+                              }),
+                            )
+                              .then(val => {
+                                if (val === 'relawan') {
+                                  dispatch(
+                                    inputReferal({
+                                      id: user?.id,
+                                      code: code,
+                                      latitude: location.latitude,
+                                      longtitude: location.longtitude,
+                                    }),
+                                  )
+                                    .then(val => {
+                                      Alert.alert('sukses', val);
+                                    })
+                                    .finally(() => {
+                                      setLoading(false);
+                                    });
+                                } else {
+                                  setShowModal(true);
+                                }
+                              })
+                              .catch(error => {
+                                console.log(error);
+                                Alert.alert('error', error);
+                                setLoading(false);
+                              });
+                          }
+                        })
+                        .catch(err => {
+                          Alert.alert(
+                            'Warning',
+                            'Anda perlu mengaktifkan perizinan lokasi untuk melakukan survey',
+                          );
+                        })
+                        .finally(() => {
+                          setLoading(false);
+                        });
+                    }
+                  } else {
+                    setLoading(false);
+                    Alert.alert(
+                      'Warning',
+                      'untuk memasukan kode referal membutuhkan koneksi internet',
+                    );
+                  }
+                });
               }}
               style={({pressed}) => [
                 {
@@ -204,6 +299,161 @@ const ProfileScreen = () => {
             </Pressable>
           </View>
         </View>
+        {showModal && (
+          <DefaultModal width={width / 1.1}>
+            <Center>
+              <Text fontWeight={'semibold'} textAlign={'center'}>
+                Anda wajid meng-upload foto, karna anda terhubung koordinator
+              </Text>
+            </Center>
+            <Text mt={4}>Tampilan Gambar</Text>
+            {!image ? (
+              <View
+                my={4}
+                bg={'rgba(244, 244, 244, 1)'}
+                width={'100%'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                height={heigth / 4}>
+                <Image
+                  source={require('../../../assets/no-gambar.png')}
+                  style={{
+                    height: 70,
+                    width: 130,
+                    resizeMode: 'contain',
+                  }}
+                />
+              </View>
+            ) : (
+              <Image
+                source={{uri: image.uri}}
+                style={{
+                  marginVertical: 10,
+                  width: '100%',
+                  height: heigth / 4,
+                  resizeMode: 'contain',
+                }}
+              />
+            )}
+            <HStack my={4} space={2} alignItems={'center'}>
+              <Pressable
+                onPress={async () => {
+                  const result = await launchImageLibrary();
+                  setImage({
+                    fileName: result.assets[0].fileName,
+                    uri: result.assets[0].uri,
+                    type: result.assets[0].type,
+                  });
+                }}
+                style={({pressed}) => [
+                  {
+                    transform: [
+                      {
+                        scale: pressed ? 0.99 : 1,
+                      },
+                    ],
+                    width: '45%',
+                    backgroundColor: 'rgba(220, 53, 69, 1)',
+                    alignItems: 'center',
+                    paddingVertical: 8,
+                    borderRadius: 8,
+                  },
+                ]}>
+                <Text color={'white'}>Buka Gallery</Text>
+              </Pressable>
+              <Pressable
+                onPress={async () => {
+                  const result = await launchCamera();
+                  setImage({
+                    fileName: result.assets[0].fileName,
+                    uri: result.assets[0].uri,
+                    type: result.assets[0].type,
+                  });
+                }}
+                style={({pressed}) => [
+                  {
+                    transform: [
+                      {
+                        scale: pressed ? 0.99 : 1,
+                      },
+                    ],
+                    marginLeft: 'auto',
+                    width: '45%',
+                    borderWidth: 1,
+                    borderColor: 'rgba(220, 53, 69, 1)',
+                    alignItems: 'center',
+                    paddingVertical: 8,
+                    borderRadius: 8,
+                  },
+                ]}>
+                <Text color={'rgba(220, 53, 69, 1)'}>Buka Kamera</Text>
+              </Pressable>
+            </HStack>
+            <Pressable
+              onPress={() => {
+                setLoading(true);
+                const data = new FormData();
+                data.append('id', user?.id);
+                data.append('code', code);
+                data.append('latitude', location.latitude);
+                data.append('longtitude', location.longtitude);
+                data.append('image', {
+                  uri: image.uri,
+                  type: image.type,
+                  name: image.fileName,
+                });
+                dispatch(inputReferal(data))
+                  .then(val => {
+                    Alert.alert('sukses', val);
+                  })
+                  .catch(error => {
+                    console.log(error);
+                    Alert.alert('error', error);
+                  })
+                  .finally(() => {
+                    setShowModal(false);
+                    setLoading(false);
+                  });
+              }}
+              disabled={!image ? true : false}
+              style={({pressed}) => [
+                {
+                  transform: [
+                    {
+                      scale: pressed ? 0.99 : 1,
+                    },
+                  ],
+                  backgroundColor: !image ? '#B1B1B1' : 'rgba(0, 195, 20, 1)',
+                  alignItems: 'center',
+                  paddingVertical: 8,
+                  borderRadius: 8,
+                },
+              ]}>
+              <Text color={'white'}>Upload Gambar</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                setShowModal(false);
+              }}
+              style={({pressed}) => [
+                {
+                  marginTop: 10,
+                  transform: [
+                    {
+                      scale: pressed ? 0.99 : 1,
+                    },
+                  ],
+                  borderWidth: 1,
+                  borderColor: 'black',
+                  alignItems: 'center',
+                  paddingVertical: 8,
+                  borderRadius: 8,
+                },
+              ]}>
+              <Text color={'black'}>Tutup</Text>
+            </Pressable>
+          </DefaultModal>
+        )}
         {user?.referrer_to !== '' && (
           <View
             borderWidth={0.8}

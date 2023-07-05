@@ -35,7 +35,6 @@ export const getDashboardData = () => {
           rejected('kesalah dari server');
         }
       } catch (error) {
-        console.log(error);
         rejected('kesalah dari server');
       }
     });

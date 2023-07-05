@@ -37,6 +37,7 @@ export const getListSurvey = (role, id) => {
           rejected('terjadi kesalahan dari server');
         }
       } catch (error) {
+        console.log(error);
         rejected('terjadi kesalahan dari server');
       }
     });
@@ -211,10 +212,11 @@ export const getPenugasan = id => {
         url: '/survey/penugasan/' + id,
         method: 'get',
       });
-      console.log(data);
-      dispatch(setPenugasan(data));
-    } catch (error) {
-      console.log(error);
-    }
+      if (Array.isArray(data)) {
+        dispatch(setPenugasan(data));
+      } else {
+        dispatch(setPenugasan([]));
+      }
+    } catch (error) {}
   };
 };

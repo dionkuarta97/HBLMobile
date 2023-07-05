@@ -1,12 +1,24 @@
 import {Modal, StyleSheet, View} from 'react-native';
 import {width} from '../Helper';
 
-const DefaultModal = ({children}) => {
+const DefaultModal = props => {
   return (
     <Modal transparent={true} animationType="fade">
       <View style={styles.container}>
         <View style={styles.dimBackground} />
-        <View style={styles.body}>{children}</View>
+        {props.width ? (
+          <View
+            style={[
+              styles.body,
+              {
+                width: props.width,
+              },
+            ]}>
+            {props.children}
+          </View>
+        ) : (
+          <View style={styles.body}>{props.children}</View>
+        )}
       </View>
     </Modal>
   );

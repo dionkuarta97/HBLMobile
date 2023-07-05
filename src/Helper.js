@@ -40,7 +40,7 @@ export const getLocation = () => {
           {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
         );
       } else {
-        rejected('a');
+        rejected({geo: 'maaf aplikasi ini perlu izin lokasi anda'});
       }
     });
   });

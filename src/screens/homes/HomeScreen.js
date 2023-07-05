@@ -1,4 +1,4 @@
-import {View, Text, Button} from 'native-base';
+import {View, Text, Button, Center} from 'native-base';
 import {
   Image,
   PermissionsAndroid,
@@ -35,6 +35,8 @@ import {
 } from '../../states/pengaduan/pengaduanAction';
 import MenuRelawan from './homeComponents/menuRelawan';
 import JumlahPemilh from './homeComponents/JumlahPemilh';
+import DefaultModal from '../../components/DefaultModal';
+import {lastLogin} from '../../states/auth/authAction';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -45,6 +47,7 @@ const HomeScreen = () => {
   const {tugasOffline} = useSelector(state => state.tugasReducer);
   const {logistikOffline} = useSelector(state => state.logistikReducer);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
 
   useFocusEffect(
@@ -52,13 +55,23 @@ const HomeScreen = () => {
       checkInternet().then(data => {
         if (data) {
           setLoading(true);
-          dispatch(getDashboardData()).finally(() => {
-            setLoading(false);
-          });
-          setLoading(true);
-          dispatch(getDashboardBerita()).finally(() => {
-            setLoading(false);
-          });
+          Promise.all([
+            dispatch(getDashboardData()),
+            dispatch(getDashboardBerita()),
+            getLocation(),
+            dispatch(lastLogin()),
+          ])
+            .then(val => {
+              dispatch(
+                setLocation({
+                  latitude: val[2].coords.latitude,
+                  longtitude: val[2].coords.longitude,
+                }),
+              );
+            })
+            .finally(() => {
+              setLoading(false);
+            });
         } else {
           setLoading(false);
         }
@@ -72,6 +85,16 @@ const HomeScreen = () => {
         flex: 1,
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}>
+      {showModal && (
+        <DefaultModal>
+          <Center py={20}>
+            <Text fontWeight={'bold'}>
+              Terjadi kesalahan pada server atau anda tidak mengaktifkan izin
+              lokasi
+            </Text>
+          </Center>
+        </DefaultModal>
+      )}
       <ScrollView style={{flex: 1}}>
         {loading && <LoadingModal />}
         <View

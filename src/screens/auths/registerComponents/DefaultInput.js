@@ -29,6 +29,7 @@ const DefaultInput = ({
         {label}
       </Text>
       <TextInput
+        maxLength={name === 'nik' ? 16 : 2553}
         autoCapitalize={autoCapitalize}
         onFocus={() => {
           handleFocus(true);
@@ -78,6 +79,15 @@ const DefaultInput = ({
                 marginTop: 2,
               }}>
               {!formatEmail(value) ? `*format email salah` : ' '}
+            </Text>
+          ) : name === 'nik' ? (
+            <Text
+              style={{
+                fontSize: 13,
+                color: '#c80b0b',
+                marginTop: 2,
+              }}>
+              {value.length !== 16 ? `*nik harus 16 karakter` : ' '}
             </Text>
           ) : (
             <Text

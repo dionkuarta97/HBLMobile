@@ -31,8 +31,6 @@ const SurveyScreen = () => {
     setTab(val);
   });
 
-  console.log(JSON.stringify(listSurvey, null, 2));
-
   return (
     <SafeAreaView style={globalStyles.container}>
       <DefaultTabBar
@@ -54,7 +52,7 @@ const SurveyScreen = () => {
         screen={[
           <SurveyAktif
             data={
-              user.role === 1
+              user.role === '1'
                 ? listSurvey?.survey.filter(
                     el =>
                       ![

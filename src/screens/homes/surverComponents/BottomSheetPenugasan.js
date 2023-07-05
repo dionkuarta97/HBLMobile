@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {heigth, width} from '../../../Helper';
+import {memo, useEffect, useState} from 'react';
+import {checkInternet, heigth, width} from '../../../Helper';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPenugasan} from '../../../states/survey/surveyAction';
 
@@ -13,13 +13,21 @@ const BottomSheetPenugasan = ({isOpen, onClose, onPress, userId}) => {
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getPenugasan(userId));
-    setLoading(false);
+    checkInternet().then(data => {
+      if (data) {
+        dispatch(getPenugasan(userId)).finally(() => {
+          setLoading(false);
+        });
+      }
+    });
   }, []);
+
   return (
     <Actionsheet isOpen={isOpen} onClose={onClose}>
       <Actionsheet.Content height={heigth / 3}>
-        <Text fontWeight={'bold'}>Pilih Daerah Penugasan</Text>
+        <Text fontSize={18} fontWeight={'bold'}>
+          Pilih Daerah Penugasan
+        </Text>
         {loading && (
           <ActivityIndicator
             color={'rgba(0, 77, 153, 1)'}
@@ -50,7 +58,7 @@ const BottomSheetPenugasan = ({isOpen, onClose, onPress, userId}) => {
                   opacity: pressed ? 0.5 : 1,
                   flexDirection: 'row',
                   alignItems: 'center',
-                  paddingVertical: 5,
+                  paddingVertical: 12,
                   borderBottomWidth: 1,
                   borderColor:
                     idx + 1 === penugasan.length
@@ -58,7 +66,7 @@ const BottomSheetPenugasan = ({isOpen, onClose, onPress, userId}) => {
                       : 'black',
                 },
               ]}>
-              <Text>{el.nama}</Text>
+              <Text fontSize={18}>{el.nama}</Text>
               <Image
                 source={require('../../../../assets/icons/arrow.png')}
                 style={{
@@ -76,4 +84,4 @@ const BottomSheetPenugasan = ({isOpen, onClose, onPress, userId}) => {
   );
 };
 
-export default BottomSheetPenugasan;
+export default memo(BottomSheetPenugasan);
