@@ -5,6 +5,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import Root from './navigations/Root';
 import {NativeBaseProvider} from 'native-base';
 import {getLocation} from './Helper';
+import {QueryClient, QueryClientProvider} from 'react-query';
+
+const queryClient = new QueryClient({});
 
 const App = () => {
   useEffect(() => {
@@ -12,11 +15,13 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-      <NativeBaseProvider>
-        <NavigationContainer>
-          <Root />
-        </NavigationContainer>
-      </NativeBaseProvider>
+      <QueryClientProvider client={queryClient}>
+        <NativeBaseProvider>
+          <NavigationContainer>
+            <Root />
+          </NavigationContainer>
+        </NativeBaseProvider>
+      </QueryClientProvider>
     </Provider>
   );
 };

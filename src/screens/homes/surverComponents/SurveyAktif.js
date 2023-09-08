@@ -19,6 +19,7 @@ const SurveyAktif = ({data}) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
+
   return (
     <ScrollView p={4}>
       {route.params?.onOpen && (

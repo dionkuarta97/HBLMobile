@@ -1,5 +1,6 @@
-import {Text, View} from 'native-base';
+import {ScrollView, Text, View} from 'native-base';
 import {Image, Pressable} from 'react-native';
+import {heigth, width} from '../../../Helper';
 
 const MenuRelawan = ({
   survey,
@@ -9,10 +10,16 @@ const MenuRelawan = ({
   navigation,
 }) => {
   return (
-    <View flexWrap={'wrap'} mt={8} flexDirection={'row'}>
+    <ScrollView
+      showsHorizontalScrollIndicator={true}
+      persistentScrollbar={true}
+      horizontal
+      mt={8}
+      py={4}>
       <View
         style={{
-          width: '25%',
+          width: width / 4,
+          height: heigth / 7,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -68,7 +75,8 @@ const MenuRelawan = ({
       </View>
       <View
         style={{
-          width: '25%',
+          width: width / 4,
+          height: heigth / 7,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -124,7 +132,8 @@ const MenuRelawan = ({
       </View>
       <View
         style={{
-          width: '25%',
+          width: width / 4,
+          height: heigth / 7,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -180,7 +189,8 @@ const MenuRelawan = ({
       </View>
       <View
         style={{
-          width: '25%',
+          width: width / 4,
+          height: heigth / 7,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -234,7 +244,45 @@ const MenuRelawan = ({
           Logistik
         </Text>
       </View>
-    </View>
+      <View
+        style={{
+          width: width / 4,
+          height: heigth / 7,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('CanvasingScreen');
+          }}
+          style={({pressed}) => [
+            {
+              transform: [
+                {
+                  scale: pressed ? 0.98 : 1,
+                },
+              ],
+              backgroundColor: pressed
+                ? 'rgba(255, 55, 44, 0.5)'
+                : 'rgba(255, 55, 44, 0.8)',
+              padding: 10,
+              borderRadius: 5,
+            },
+          ]}>
+          <Image
+            source={require('../../../../assets/icons/survey.png')}
+            style={{
+              width: 25,
+              height: 25,
+              resizeMode: 'contain',
+            }}
+          />
+        </Pressable>
+        <Text mt={1} color={'rgba(150, 150, 150, 1)'} fontSize={14}>
+          Canvasing
+        </Text>
+      </View>
+    </ScrollView>
   );
 };
 

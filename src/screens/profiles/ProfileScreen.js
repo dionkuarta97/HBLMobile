@@ -304,7 +304,8 @@ const ProfileScreen = () => {
           <DefaultModal width={width / 1.1}>
             <Center>
               <Text fontWeight={'semibold'} textAlign={'center'}>
-                Anda wajid meng-upload foto, karna anda terhubung koordinator
+                Apabila Anda hendak terhubung ke koordinator dan menjadi
+                relawan, maka Anda wajib mengupload foto wajah Anda
               </Text>
             </Center>
             <Text mt={4}>Tampilan Gambar</Text>

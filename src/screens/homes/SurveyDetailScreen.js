@@ -1,7 +1,7 @@
 import {Pressable, SafeAreaView, TextInput} from 'react-native';
 import {default as globalStyles} from '../../GlobalStyles';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {Radio, Text, View} from 'native-base';
+import {Radio, ScrollView, Text, View} from 'native-base';
 import {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -11,7 +11,7 @@ import {
   setSurveyOffline,
 } from '../../states/survey/surveyAction';
 import LoadingModal from '../../components/ModalLoading';
-import {checkInternet} from '../../Helper';
+import {checkInternet, heigth} from '../../Helper';
 
 const SurveyDetailScreen = () => {
   const route = useRoute();
@@ -79,7 +79,7 @@ const SurveyDetailScreen = () => {
             </Text>
           </View>
         </View>
-        <View p={4}>
+        <ScrollView p={4}>
           <View width={'100%'}>
             <Text fontWeight={'semibold'} fontSize={15}>
               {detail.question[idx].pertanyaan}
@@ -116,14 +116,32 @@ const SurveyDetailScreen = () => {
                   }}
                   value={answerSurvey[idx]?.jawaban}
                   colorScheme={'blue'}>
-                  {detail.question[idx].question_detail.map(el => (
-                    <Radio value={el.id} mt={4} key={el.id}>
-                      <Text mt={4}>{el.jawaban}</Text>
+                  {detail.question[idx].question_detail.map((el, index) => (
+                    <Radio
+                      value={el.id}
+                      mt={4}
+                      mb={
+                        detail.question[idx].question_detail?.length - 1 ===
+                        index
+                          ? 50
+                          : 0
+                      }
+                      key={el.id}>
+                      <Text
+                        mb={
+                          detail.question[idx].question_detail?.length - 1 ===
+                          index
+                            ? 50
+                            : 0
+                        }
+                        mt={4}>
+                        {el.jawaban}
+                      </Text>
                     </Radio>
                   ))}
                 </Radio.Group>
               )}
-        </View>
+        </ScrollView>
       </View>
 
       <Pressable

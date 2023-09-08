@@ -7,6 +7,7 @@ import {
   SET_LOCATION,
   SET_VIDEO_ID,
   SET_JUMLAH_PEMILIH,
+  SET_QUICKCOUNT_ANSWER,
 } from './homeTypes';
 
 export const setDashboardData = payload => {
@@ -103,6 +104,13 @@ export const getDashboardBerita = () => {
 export const setListBerita = payload => {
   return {
     type: SET_LIST_BERITA,
+    payload,
+  };
+};
+
+export const setQuickCountAnswer = payload => {
+  return {
+    type: SET_QUICKCOUNT_ANSWER,
     payload,
   };
 };

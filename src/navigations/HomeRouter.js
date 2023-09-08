@@ -16,6 +16,10 @@ import RingkasanTugasScreen from '../screens/tugas/RingkasanTugasScreen';
 import LogistikScreen from '../screens/logistik/LogistikScreen';
 import KirimLogistikScreen from '../screens/logistik/KirimLogistikScreen';
 import RingkasanLogistikScreen from '../screens/logistik/RingkasanLogistikScreen';
+import CanvasingScreen from '../screens/canvasing/CanvasingScreen';
+import QuickCountScreen from '../screens/quickcount/QuickCountScreen';
+import FomulirScreen from '../screens/quickcount/FomulirScreen';
+import UploadFotoScreen from '../screens/quickcount/UploadFotoScreen';
 
 const HomeStack = createStackNavigator();
 
@@ -31,7 +35,7 @@ const homes = [
     name: 'BeritaScreen',
     component: BeritaScreen,
     options: {
-      title: 'Berita dari Hillary',
+      title: 'Berita dari Franko',
       headerStyle: {backgroundColor: 'white', height: 60, elevation: 0},
     },
   },
@@ -152,6 +156,38 @@ const homes = [
     component: RingkasanLogistikScreen,
     options: {
       title: 'Logistik',
+      headerStyle: {backgroundColor: 'white', height: 60, elevation: 0},
+    },
+  },
+  {
+    name: 'CanvasingScreen',
+    component: CanvasingScreen,
+    options: {
+      title: 'Canvasing',
+      headerStyle: {backgroundColor: 'white', height: 60, elevation: 0},
+    },
+  },
+  {
+    name: 'QuickCountScreen',
+    component: QuickCountScreen,
+    options: {
+      title: 'Quick Count',
+      headerStyle: {backgroundColor: 'white', height: 60, elevation: 0},
+    },
+  },
+  {
+    name: 'FomulirScreen',
+    component: FomulirScreen,
+    options: {
+      title: 'Fomulir',
+      headerStyle: {backgroundColor: 'white', height: 60, elevation: 0},
+    },
+  },
+  {
+    name: 'UploadFotoScreen',
+    component: UploadFotoScreen,
+    options: {
+      title: 'Upload Foto',
       headerStyle: {backgroundColor: 'white', height: 60, elevation: 0},
     },
   },

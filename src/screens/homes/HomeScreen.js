@@ -37,6 +37,8 @@ import MenuRelawan from './homeComponents/menuRelawan';
 import JumlahPemilh from './homeComponents/JumlahPemilh';
 import DefaultModal from '../../components/DefaultModal';
 import {lastLogin} from '../../states/auth/authAction';
+import {useQuery} from 'react-query';
+import {getPenugasanQuickCount} from '../../states/reactQuery';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -50,9 +52,17 @@ const HomeScreen = () => {
   const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
 
+  const {data, refetch} = useQuery(
+    ['penugasan_quick_count'],
+    async () => await getPenugasanQuickCount(user.id),
+    {
+      staleTime: 60000,
+    },
+  );
   useFocusEffect(
     useCallback(() => {
       checkInternet().then(data => {
+        refetch({forece: true});
         if (data) {
           setLoading(true);
           Promise.all([
@@ -195,6 +205,25 @@ const HomeScreen = () => {
                 alignItems={'center'}
                 paddingY={3}>
                 <Text color={'white'}>Survey Khusus</Text>
+              </Button>
+            )}
+
+            {data?.penugasan && data?.penugasan?.tps_detail?.path === '[]' && (
+              <Button
+                onPress={async () => {
+                  navigation.navigate('QuickCountScreen', {
+                    tpsId: data?.penugasan.id_tps,
+                  });
+                }}
+                mt={1}
+                colorScheme={'darkBlue'}
+                width={width / 1.4}
+                justifyContent={'center'}
+                alignSelf={'center'}
+                borderRadius={5}
+                alignItems={'center'}
+                paddingY={3}>
+                <Text color={'white'}>Quick Count</Text>
               </Button>
             )}
           </View>

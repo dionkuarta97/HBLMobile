@@ -11,6 +11,7 @@ const BottomSheetPenugasan = ({isOpen, onClose, onPress, userId}) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     setLoading(true);
     checkInternet().then(data => {

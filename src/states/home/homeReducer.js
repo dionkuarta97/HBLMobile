@@ -5,6 +5,7 @@ import {
   SET_JUMLAH_PEMILIH,
   SET_LIST_BERITA,
   SET_LOCATION,
+  SET_QUICKCOUNT_ANSWER,
   SET_VIDEO_ID,
 } from './homeTypes';
 
@@ -15,6 +16,24 @@ const initialState = {
   listBerita: checkStorage('listBerita', null, 'string'),
   location: checkStorage('location', null, 'string'),
   jumlahPemilih: checkStorage('jumlahPemilih', [], 'string'),
+  quickCountAnswer: checkStorage(
+    'quickCountAnswer',
+    [
+      {
+        tingkat: 1,
+        answer: [],
+      },
+      {
+        tingkat: 2,
+        answer: [],
+      },
+      {
+        tingkat: 3,
+        answer: [],
+      },
+    ],
+    'string',
+  ),
 };
 
 const homeReducer = (state = initialState, action) => {
@@ -36,6 +55,9 @@ const homeReducer = (state = initialState, action) => {
   } else if (action.type === SET_JUMLAH_PEMILIH) {
     setStorage('jumlahPemilih', JSON.stringify(action.payload));
     return {...state, jumlahPemilih: action.payload};
+  } else if (action.type === SET_QUICKCOUNT_ANSWER) {
+    setStorage('quickCountAnswer', JSON.stringify(action.payload));
+    return {...state, quickCountAnswer: action.payload};
   }
   return state;
 };

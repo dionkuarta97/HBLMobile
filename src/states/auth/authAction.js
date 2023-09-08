@@ -127,11 +127,14 @@ export const lastLogin = () => {
   return async (dispatch, getState) => {
     try {
       const {id} = getState().authReducer.user;
+      const {latitude, longtitude} = getState().homeReducer.location;
       await dionServer({
         url: '/user/last',
         method: 'POST',
         data: {
           id,
+          latitude,
+          longtitude,
         },
       });
       dispatch(getUser());
